@@ -10,6 +10,9 @@ import { APP_ROUTES } from './app.routes';
 import { PanelModule } from './panel/panel.module';
 import { ClientModule } from './client/client.module';
 
+// Servicios
+import { ServiceModule } from './services/service.module';
+
 
 import { AppComponent } from './app.component';
 
@@ -32,7 +35,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     CommonModule,
     APP_ROUTES,
     PanelModule,
-    ClientModule
+    ClientModule,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
