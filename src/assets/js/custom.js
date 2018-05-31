@@ -4,12 +4,16 @@ Author: Wrappixel
 Email: niravjoshi87@gmail.com
 File: js
 */
-$(function() {
-    "use strict";
+
+function init_plugins() {
+
+    
     $(function() {
-        $(".preloader").fadeOut();
-    });
-    jQuery(document).on('click', '.mega-dropdown', function(e) {
+        "use strict";
+        $(function() {
+            $(".preloader").fadeOut();
+        });
+        jQuery(document).on('click', '.mega-dropdown', function(e) {
         e.stopPropagation()
     });
     // ============================================================== 
@@ -26,7 +30,7 @@ $(function() {
             $("body").removeClass("mini-sidebar");
             $('.navbar-brand span').show();
         }
-
+        
         var height = ((window.innerHeight > 0) ? window.innerHeight : this.screen.height) - 1;
         height = height - topOffset;
         if (height < 1) height = 1;
@@ -37,7 +41,7 @@ $(function() {
     };
     $(window).ready(set);
     $(window).on("resize", set);
-
+    
     // ============================================================== 
     // Theme options
     // ==============================================================     
@@ -54,14 +58,14 @@ $(function() {
             
         }
     });
-
+    
     // this is for close icon when navigation open in mobile view
     $(".nav-toggler").click(function() {
         $("body").toggleClass("show-sidebar");
         $(".nav-toggler i").toggleClass("ti-menu");
         $(".nav-toggler i").addClass("ti-close");
     });
-
+    
     $(".search-box a, .search-box .app-search .srh-btn").on('click', function() {
         $(".app-search").toggle(200);
     });
@@ -78,7 +82,7 @@ $(function() {
     $('.floating-labels .form-control').on('focus blur', function(e) {
         $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
     }).trigger('blur');
-
+    
     // ============================================================== 
     // Auto select left navbar
     // ============================================================== 
@@ -94,7 +98,7 @@ $(function() {
                 break;
             }
         }
-
+        
     });
     // ============================================================== 
     //tooltip
@@ -114,7 +118,7 @@ $(function() {
     $(function() {
         $('#sidebarnav').AdminMenu();
     });
-
+    
     // ============================================================== 
     // Perfact scrollbar
     // ============================================================== 
@@ -132,7 +136,7 @@ $(function() {
     });
 
     
-
+    
     // ============================================================== 
     // Collapsable cards
     // ==============================================================
@@ -148,10 +152,12 @@ $(function() {
         $(this).closest('.card').find('[data-action="expand"] i').toggleClass('mdi-arrow-expand mdi-arrow-compress');
         $(this).closest('.card').toggleClass('card-fullscreen');
     });
-
+    
     // Close Card
     $('a[data-action="close"]').on('click', function() {
         $(this).closest('.card').removeClass().slideUp('fast');
     });
-
-});
+    
+    });
+    
+}
