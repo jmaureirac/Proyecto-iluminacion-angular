@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+declare function init_plugins();
+
+
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -10,6 +13,7 @@ export class PanelComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    init_plugins();    
   }
 
 }
