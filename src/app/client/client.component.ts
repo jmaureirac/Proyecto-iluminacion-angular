@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 declare function init_plugins();
 
@@ -9,7 +10,11 @@ declare function init_plugins();
 })
 export class ClientComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public title: Title
+  ) {
+    this.title.setTitle('JMC Iluminación');
+  }
 
   ngOnInit() {
     init_plugins();    

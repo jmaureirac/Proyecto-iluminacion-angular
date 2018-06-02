@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public router: Router,
+    public location: Location
+  ) { }
 
   ngOnInit() {
+  }
+
+  back() {
+    this.location.back();
   }
 
 }
