@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  SidebarService
+  SidebarService,
+  UserService,
+  LoginGuard
 } from './service.index';
 
 
@@ -11,7 +13,9 @@ import {
     CommonModule
   ],
   providers: [
-    SidebarService
+    SidebarService,
+    UserService,
+    LoginGuard
   ],
   declarations: []
 })
