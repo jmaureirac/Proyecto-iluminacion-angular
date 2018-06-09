@@ -16,6 +16,9 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { SubcategoriaComponent } from './subcategoria/subcategoria.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { CotizarComponent } from './cotizar/cotizar.component';
+import { UserComponent } from './user/user.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.component';
 
 @NgModule({
     imports: [
@@ -33,7 +36,10 @@ import { CotizarComponent } from './cotizar/cotizar.component';
         CategoriaComponent,
         SubcategoriaComponent,
         CotizacionComponent,
-        CotizarComponent
+        CotizarComponent,
+        UserComponent,
+        PerfilComponent,
+        MisCotizacionesComponent
     ],
     exports: [
         PanelComponent,

@@ -1,0 +1,105 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Usuarios inscritos</h4>
+        <!-- <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6> -->
+        <div class="table-responsive m-t-40">
+          <table class="display table full-color-table full-inverse-table hover-table" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th class="text-center">Nombre/Empresa</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Auth</th>
+                <th class="text-center">Rol</th>
+                <th class="text-center">Fecha de ingreso</th>
+                <th class="text-center">Fecha de modificación</th>
+                <th class="text-center">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users" >
+                <td class="text-center"> {{ user.name }}</td>
+                <td class="text-center"> {{ user.email }} </td>
+                <td class="text-center">                    
+                  <label *ngIf="user.google" class="label label-danger">Google</label>
+                  <label *ngIf="!user.google" class="label label-info">Google</label>
+                </td>
+                <td class="text-center">                    
+                  <p *ngIf="user.role === 'ADMIN_ROLE'" >Administrador</p>
+                  <p *ngIf="user.role === 'USER_ROLE'" >Usuario</p>
+                </td>                                            
+                <td class="text-center"> {{ user.created_at | date:"dd/MM/yyyy, HH:mm" }} </td>
+                <td class="text-center"> {{ user.updated_at | date:"dd/MM/yyyy, HH:mm" }} </td>
+                <td class="text-center">
+                    <a href="javascript:void(0)" (click)="this.selected = user" data-toggle="modal" data-target="#modal_update">
+                      <i style="font-size: 25px" class="fa fa-pencil m-r-10"></i>
+                    </a>                    
+                    <a href="javascript:void(0)" (click)="confirmarEliminar(user)" >
+                      <i style="font-size: 25px" class="fa fa-trash-o text-danger"></i>
+                    </a>
+                </td>
+              </tr>       
+            </tbody>          
+          </table>
+        </div>
+
+        <!-- Navegación -->
+        <nav aria-label="Page navigation">
+          <ul class="pagination pagination-split m-t-30 justify-content-end">
+            <li class="page-item">
+              <a class="page-link" (click)="goPage(desde-1)" aria-label="Previous" *ngIf="desde !== 0" >
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item" *ngFor="let page of paginas" [ngClass]="{'active': desde === page}" >
+              <a class="page-link pointer" (click)="goPage(page)"> {{ page + 1 }} </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" (click)="goPage(desde+1)" aria-label="Next" *ngIf="desde !== paginas.length-1" >
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Actualizar Usuario -->
+<div id="modal_update" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;" *ngIf="selected !== null" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Actualizar usuario</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Nombre:</label>
+            <input [(ngModel)]="this.selected.name" name="name" type="text" class="form-control" placeholder="Nombre de usuario">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Rol:</label>
+            <select [(ngModel)]="this.selected.role" name="role" class="form-control" >
+              <option value="USER_ROLE"> Usuario </option>
+              <option value="ADMIN_ROLE"> Administrador </option>
+            </select>
+          </div> 
+            
+        </form>
+        <div class="modal-footer">
+            <button (click)="actualizarUser()" type="button" class="btn btn-danger waves-effect waves-light" data-dismiss="modal">Guardar cambios</button>
+            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

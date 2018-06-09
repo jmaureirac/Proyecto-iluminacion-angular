@@ -17,13 +17,16 @@ import { User } from '../../models/user.model';
 @Injectable()
 export class UserService {
 
+  id: string;
   user: User;
   token: string;
 
   constructor(
     public http: HttpClient,
     public router: Router
-  ) { }
+  ) {
+    this.getStorage();
+  }
 
   registrar( user: User ) {
     let url = URL_SERVER + '/user' ;
@@ -101,6 +104,61 @@ export class UserService {
 
   isLogged() {
     return ( this.token.length > 5 ) ? true : false;
+  }
+
+  loadUsers() {
+    let url = URL_SERVER + '/user/all';
+
+    return this.http.get(url);
+      
+  }
+
+  loadUsersPaginated( desde: number = 0 ) {
+    let url = URL_SERVER + '/user?desde=' + desde;
+
+    return this.http.get(url);
+  }
+
+  updateUser( user: User ) {
+    let url = URL_SERVER + '/user/' + user._id + '?token=' + this.token;
+
+    return this.http.put(url, user)
+      .map( (res: any) => {
+        swal('¡Correcto!', 'Datos actualizados correctamente', 'success');
+        return res.user;
+      })
+      .catch( err => {
+        if ( err.status === 401 ) {
+          swal('¡Cuidado!', 'Ha expirado su sesión, vuelva a ingresar', 'info');   
+          this.router.navigate(['/login']);       
+          return Observable.throw(err);
+        } else { 
+          swal('¡Error!', 'Error al actualizar datos', 'error');
+          return Observable.throw(err);
+        }
+      });      
+      
+  }
+
+  deleteUser( user: User ) {
+    let url = URL_SERVER + '/user/' + user._id + '?token=' + this.token;
+
+    return this.http.delete(url)
+      .map( (res: any) => {
+        swal('¡Correcto!', 'Usuario eliminado correctamente', 'success');
+        
+      })
+      .catch( err => {
+        if ( err.status === 401 ) {
+          swal('¡Cuidado!', 'Ha expirado su sesión, vuelva a ingresar', 'info');
+          this.router.navigate(['/login']);       
+          return Observable.throw(err);
+        } else { 
+          swal('¡Error!', 'Error al eliminar usuario', 'error');
+          return Observable.throw(err);
+        }
+      });
+      
   }
   
 }
