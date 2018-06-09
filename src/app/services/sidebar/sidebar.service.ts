@@ -9,8 +9,14 @@ export class SidebarService {
       icono: 'mdi mdi-gauge',
       submenu: [
         { titulo: 'Dashboard', url: 'dashboard' },
-        { titulo: 'login', url: '/login' },        
-        { titulo: 'registro', url: '/register' }
+        { titulo: 'Mi perfil', url: 'perfil' }
+      ]
+    },
+    {
+      titulo: 'Usuarios',
+      icono: 'mdi mdi-account-multiple',
+      submenu: [
+        { titulo: 'Usuarios', url: 'usuarios' }
       ]
     },
     {
@@ -26,7 +32,8 @@ export class SidebarService {
       icono: 'mdi mdi-content-paste',
       submenu: [
         { titulo: 'Cotizar', url: 'cotizar' },
-        { titulo: 'Cotizaciones', url: 'cotizaciones' }
+        { titulo: 'Cotizaciones', url: 'cotizaciones' },
+        { titulo: 'Mis cotizaciones', url: 'mis-cotizaciones' }
       ]
     },
     {
