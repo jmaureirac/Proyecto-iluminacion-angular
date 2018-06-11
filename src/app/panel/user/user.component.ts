@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/service.index';
+import { UserService, UpdateUserService } from '../../services/service.index';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
@@ -17,15 +17,13 @@ export class UserComponent implements OnInit {
   users: User[] = [];
   total: number;
 
-  // modal actualizar usuario
-  selected: User = null;
-
   // paginacion
   paginas: number[] = [];
   desde: number = 0;
 
   constructor(
     public _userService: UserService,
+    public _modalUpload: UpdateUserService,
     public router: Router
   ) {
     
@@ -33,6 +31,8 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.cargarUsuarios();
+    this._modalUpload.notificacion
+      .subscribe( () => this.cargarUsuarios() );
   }
 
   cargarUsuarios() {
@@ -69,11 +69,6 @@ export class UserComponent implements OnInit {
         this.desde = page;
       });
   }
-
-  actualizarUser() {
-    this._userService.updateUser( this.selected )
-      .subscribe();
-  }
   
   confirmarEliminar( user: User ) {
     swal({
@@ -86,7 +81,7 @@ export class UserComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete) {
         this._userService.deleteUser(user)
-          .subscribe( deleted => {
+          .subscribe( () => {
             swal('Usuario eliminado correctamente', {
               icon: 'success',
             });
@@ -96,6 +91,10 @@ export class UserComponent implements OnInit {
         swal('Has cancelado la operación');
       }
     });
+  }
+
+  mostrarModal( user: User ) {
+    this._modalUpload.mostrarModal( user );
   }
 
 
