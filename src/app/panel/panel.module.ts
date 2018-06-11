@@ -6,6 +6,9 @@ import { SharedModule } from '../shared/shared.module';
 // Rutas
 import { PANEL_ROUTES } from './panel.routes';
 
+// Pipes
+import { PipesModule } from '../pipes/pipes.module';
+
 // Componentes
 import { PanelComponent } from './panel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,12 +23,17 @@ import { UserComponent } from './user/user.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.component';
 
+// Componentes modal
+import { UpdateUserComponent } from '../components/modals/update-user/update-user.component';
+import { CreateProductoComponent } from '../components/modals/create-producto/create-producto.component';
+
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         SharedModule,
-        PANEL_ROUTES
+        PANEL_ROUTES,
+        PipesModule
     ],
     declarations: [
         PanelComponent,
@@ -39,11 +47,14 @@ import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.co
         CotizarComponent,
         UserComponent,
         PerfilComponent,
-        MisCotizacionesComponent
+        MisCotizacionesComponent,
+        UpdateUserComponent,
+        CreateProductoComponent
     ],
     exports: [
         PanelComponent,
-        DashboardComponent
+        DashboardComponent,
+        UpdateUserComponent
     ]
 })
 export class PanelModule { }

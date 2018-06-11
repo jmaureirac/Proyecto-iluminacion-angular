@@ -1,0 +1,37 @@
+<!-- Modal Actualizar Usuario -->
+<div class="fondo-negro animated fadeIn" [ngClass]="_modalUpdate.oculto" >
+
+  <div class="modal" tabindex="-1" role="dialog" style="display: block;" *ngIf="user" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Actualizar usuario</h4>
+          <button type="button" class="close" aria-hidden="true" (click)="cerrarModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <form #form="ngForm" ngNativeValidate (ngSubmit)="actualizarUsuario(form)" >
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">Nombre:</label>
+              <input [ngModel]="user.name" name="name" type="text" class="form-control" placeholder="Nombre de usuario" required>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">Rol:</label>
+            <select [(ngModel)]="user.role" name="role" class="form-control" required>
+              <option value="USER_ROLE"> Usuario </option>
+              <option value="ADMIN_ROLE"> Administrador </option>
+            </select>
+            </div> 
+            
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger waves-effect waves-light" >Guardar cambios</button>
+              <button (click)="cerrarModal()" type="button" class="btn btn-default waves-effect">Cerrar</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

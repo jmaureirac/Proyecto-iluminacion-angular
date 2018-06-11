@@ -4,7 +4,10 @@ import { CommonModule } from '@angular/common';
 import {
   SidebarService,
   UserService,
-  LoginGuard
+  ProductoService,
+  LoginGuard,
+  UpdateUserService,
+  CreateProductoService
 } from './service.index';
 
 
@@ -15,7 +18,10 @@ import {
   providers: [
     SidebarService,
     UserService,
-    LoginGuard
+    ProductoService,
+    LoginGuard,
+    UpdateUserService,
+    CreateProductoService
   ],
   declarations: []
 })
