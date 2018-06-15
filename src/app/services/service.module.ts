@@ -5,6 +5,7 @@ import {
   SidebarService,
   UserService,
   ProductoService,
+  ClasificacionService,
   LoginGuard,
   UpdateUserService,
   CreateProductoService
@@ -18,6 +19,7 @@ import {
   providers: [
     SidebarService,
     UserService,
+    ClasificacionService,
     ProductoService,
     LoginGuard,
     UpdateUserService,
