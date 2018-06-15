@@ -14,7 +14,9 @@ export class Producto {
         public flujo_luminoso?: string,
         public grado_proteccion?: string,
         public img?: string,
-        public medidas?: any,
+        public largo?: number,
+        public altura?: number,
+        public ancho?: number,
         public _id?: string
     ) {
 
