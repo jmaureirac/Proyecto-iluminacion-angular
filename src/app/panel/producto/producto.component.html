@@ -32,15 +32,176 @@
                 <td class="text-center"> {{ producto.marca.nombre }} </td>
                 <td class="text-center"> $ {{ producto.precio_unitario | number }} </td>
                 <td class="text-center">
-                    <button type="button" class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#responsive-modal">
+                    <button type="button" class="btn btn-secondary btn-rounded" (click)="_modalCreateProducto.mostrardetalle(producto)" >
                         <i class="fa fa-plus"></i> &nbsp; Ver detalles
                     </button>
+                    <div id="responsive-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" style="display: none; overflow-y: auto;" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Información de producto: </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" >×</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-body">
+                                                <h3 class="box-title">Person Info</h3>
+                                                <hr class="m-t-0 m-b-40">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">First Name:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> John </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Last Name:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> Doe </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Gender:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> Male </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                </div>
+                                                <!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Gender:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> Male </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Date of Birth:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> 11/06/1987 </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                </div>
+                                                <!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Category:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> Category1 </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Membership:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> Free </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                </div>
+                                                <!--/row-->
+                                                <h3 class="box-title">Address</h3>
+                                                <hr class="m-t-0 m-b-40">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Address:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> E104, Dharti-2, Near silverstar mall </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">City:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> Bhavnagar </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">State:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> Gujarat </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                </div>
+                                                <!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Post Code:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> 457890 </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="control-label text-right col-md-3">Country:</label>
+                                                            <div class="col-md-9">
+                                                                <p class="form-control-static"> India </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--/span-->
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-actions">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-offset-3 col-md-9">
+                                                                <button type="submit" class="btn btn-danger"> <i class="fa fa-pencil"></i> Edit</button>
+                                                                <button type="button" class="btn btn-inverse">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6"> </div>
+                                                </div>
+                                            </div> -->
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-inverse waves-effect" data-dismiss="modal">Cerrar</button>
+                                    <!-- <button type="button" class="btn btn-danger waves-effect waves-light">Save changes</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
                 <td class="text-center">
                     <a href="javascript:void(0)">
                       <i style="font-size: 25px" class="fa fa-pencil m-r-10"></i>
                     </a>                    
-                    <a href="javascript:void(0)" >
+                    <a href="javascript:void(0)" (click)="eliminarProducto(producto)" >
                       <i style="font-size: 25px" class="fa fa-trash-o text-danger"></i>
                     </a>
                 </td>
@@ -76,30 +237,5 @@
   
 
 <!-- Modal detalles de producto -->
-<div id="responsive-modal" class="modal animated fadeIn fondo-negro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Modal Content is Responsive</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="control-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger waves-effect waves-light">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 

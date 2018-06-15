@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService, CreateProductoService } from '../../services/service.index';
 import { Router } from '@angular/router';
+import { Producto } from '../../models/producto.model';
 
 @Component({
   selector: 'app-producto',
@@ -23,7 +24,10 @@ export class ProductoComponent implements OnInit {
 
   ngOnInit() {
     this.cargarProductos();
+    this._modalCreateProducto.notificacion
+      .subscribe( () => this.cargarProductos() );
   }
+
 
   cargarProductos() {
     this._productoService.getProductosPaginados(this.desde)
@@ -31,6 +35,9 @@ export class ProductoComponent implements OnInit {
         this.productos = res.productos;
         this.total = res.total;
         if ( this.paginas.length === 0 ) {
+          this.paginate();
+        } else {
+          this.paginas = [];
           this.paginate();
         }
       });
@@ -60,6 +67,13 @@ export class ProductoComponent implements OnInit {
 
   crearProducto() {
     this._modalCreateProducto.mostrarModal();
+  }
+
+  eliminarProducto( producto: Producto ) {
+    this._productoService.deleteProducto( producto )
+      .subscribe( () => {
+        this.cargarProductos();
+      });
   }
 
 }

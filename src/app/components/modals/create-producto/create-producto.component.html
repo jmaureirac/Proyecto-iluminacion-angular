@@ -1,7 +1,7 @@
 
 <div class="fondo-negro animated fadeIn" [ngClass]="_modalCreateProducto.oculto" >
 
-    <div class="modal bs-example-modal-lg" tabindex="-1" role="dialog" style="display: block; padding-right: 17px;" >
+    <div class="modal bs-example-modal-lg" tabindex="-1" role="dialog" style="display: block; padding-right: 17px; overflow-y: auto;" >
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -9,49 +9,77 @@
             <button type="button" class="close" aria-hidden="true" (click)="cerrarModal()">×</button>
           </div>
           <div class="modal-body">
-            <form #form="ngForm" ngNativeValidate (ngSubmit)="crearProducto()" class="form-material m-t-40 row" style="margin-top: 5px" >
-              <!-- primera linea -->
-                <div class="form-group col-md-6 m-t-20"> Nombre <span class="text-danger"> * </span>
-                    <input type="text" class="form-control form-control-line">
+            <form #form="ngForm" ngNativeValidate (ngSubmit)="crearProducto(form)" class="form-material form-bordered m-t-40 row" style="margin-top: 0px;  margin-left: 10px; margin-right: 10px;" >
+              <!-- Obligatorios 1 -->
+                <div class="form-group col-md-7 m-t-20"> Nombre del producto<span class="text-danger"> * </span>
+                    <input [ngModel]="nuevoProducto" type="text" name="nombre" class="form-control form-control-line" required>
                 </div>
-                <div class="form-group col-md-6 m-t-20"> Subcategoria <span class="text-danger"> * </span>
-                    <input type="email" id="example-email2" name="example-email" class="form-control" > 
+                <div class="form-group col-md-5 m-t-20"> Precio unitario <span class="text-danger"> * </span> &nbsp; <label class="label label-rounded label-info" > CLP </label>
+                    <input [ngModel]="nuevoProducto" type="number" name="precio_unitario" class="form-control" required > 
                 </div>
-              <!-- segunda linea -->
-                <div class="form-group col-md-4 m-t-20"> Marca <span class="text-danger"> * </span>
-                    <input type="text" class="form-control form-control-line">
-                  </div>
-                <div class="form-group col-md-4 m-t-20"> Precio unitario <span class="text-danger"> * </span>
-                    <input type="email" id="example-email2" name="example-email" class="form-control" >
-                  </div>
-                <div class="form-group col-md-4 m-t-20"> Voltaje
-                    <input type="text" class="form-control" >
+                
+              <!-- Obligatorios 2 -->
+                <div class="form-group col-md-4 m-t-20"> Marca <span class="text-danger"> * </span> &nbsp;
+                  <a href="javascript:void(0)" (click)="nuevaClasificacion('marcas')" ><i class="fa fa-plus-circle"></i> Nueva </a>
+                  <select [ngModel]="nuevoProducto" name="marca" class="form-control" required> 
+                      <option value="" > Seleccione marca </option>
+                      <option *ngFor="let marca of marcas" [value]="marca._id" > {{ marca.nombre }} </option>
+                  </select>
                 </div>
-              <!-- tercera linea -->
-                <div class="form-group col-md-3 m-t-20"> Flujo Luminoso
-                    <input type="text" class="form-control" > </div>
-                <div class="form-group col-md-3 m-t-20">Medidas
-                    <select class="form-control"> 
-                        <option>col-md-3</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
+                <div class="form-group col-md-4 m-t-20"> Subcategoria <span class="text-danger"> * </span> &nbsp;
+                  <a href="javascript:void(0)" (click)="nuevaClasificacion('subcategorias')" ><i class="fa fa-plus-circle"></i> Nueva </a>
+                  <select [ngModel]="nuevoProducto" name="subcategoria" class="form-control" required (change)="onChange(form.value.subcategoria)"> 
+                      <option value="" > Seleccione subcategoria </option>
+                      <option *ngFor="let subcategoria of subcategorias" [value]="subcategoria._id" > {{ subcategoria.nombre }} </option>
+                  </select>
                 </div>
-                <div class="form-group col-md-3 m-t-20"> Medidas
-                    <input type="text"  class="form-control form-control-line"> </div>
-
-              <!-- descripcion -->
+                <div class="form-group col-md-4 m-t-20"> Categoria &nbsp; <a href="javascript:void(0)" (click)="nuevaClasificacion('categorias')" ><i class="fa fa-plus-circle"></i> Nueva </a>
+                    <br>
+                    <input type="text" class="form-control col-md-6 form-control-line" disabled="true" [value]="categoria" >
+                </div>
+                
+                <!-- Opcionales 1 -->
+                <div class="form-group col-md-3 m-t-20"> Material <label class="label label-rounded label-info" > comp </label>
+                    <input ngModel name="material" type="text" class="form-control" placeholder="material" >
+                </div>
+                <div class="form-group col-md-3 m-t-20"> G° Protección <label class="label label-rounded label-info" > IP </label>
+                    <input ngModel name="grado_proteccion" type="text" class="form-control" placeholder="IP65" >
+                </div>
+                <div class="form-group col-md-3 m-t-20"> Vida Útil <label class="label label-rounded label-info" > horas </label>
+                    <input ngModel name="vida_util" type="text" class="form-control" placeholder="10000 hrs" >
+                </div>
+                <div class="form-group col-md-3 m-t-20"> Temperatura <label class="label label-rounded label-info" > C° </label>
+                    <input ngModel name="temperatura" type="text"  class="form-control" placeholder="27°C" >
+                </div>
+                
+                <!-- Opcionales 2 -->
+                <div class="form-group col-md-3 m-t-20"> Flujo Luminoso <label class="label label-rounded label-info" > l </label>
+                    <input ngModel name="flujo_luminoso" type="text" class="form-control" placeholder="100 lúmenes" >
+                </div>
+                <div class="form-group col-md-3 m-t-20"> Voltaje <label class="label label-rounded label-info" > Volt </label>
+                    <input ngModel name="voltaje" type="text" class="form-control" placeholder="10V" >
+                </div>
+                <div class="form-group col-md-3 m-t-20"> Potencia <label class="label label-rounded label-info" > Watts </label>
+                    <input ngModel name="potencia" type="text" class="form-control" placeholder="80W" >
+                </div>
+                <div class="form-group col-md-3 m-t-20"> Medidas <br>
+                  <small> Ancho &nbsp; Alto &nbsp;&nbsp; Largo </small> <br>
+                  <input ngModel name="ancho" type="number" class="col-md-3 form-control" placeholder="cm">
+                  <input ngModel name="altura" type="number" class="col-md-3 form-control" placeholder="cm">
+                  <input ngModel name="largo" type="number" class="col-md-3 form-control" placeholder="cm">
+                </div>
+                <!-- descripcion -->
                 <div class="form-group col-md-12 m-t-20">
                     <label>Descripción</label>
-                    <textarea class="form-control" rows="5"></textarea>
+                    <textarea ngModel name="descripcion" class="form-control" rows="3"></textarea>
                 </div>
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger waves-effect waves-light" >Crear producto</button>
                     <button (click)="cerrarModal()" type="button" class="btn btn-default waves-effect">Cerrar</button>
                 </div>
-
             </form>
+
           </div>
         </div>
       </div>
@@ -59,3 +87,149 @@
   
   
   </div>
+
+
+
+<div class="fondo-negro animated fadeIn" [ngClass]="_modalCreateProducto.detalle" *ngIf="_modalCreateProducto.productoDetalle !== null" >
+
+    <div class="modal bs-example-modal-lg" tabindex="-1" role="dialog" style="display: block; padding-right: 17px; overflow-y: auto;" >
+        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card-body">
+                    <form class="form-horizontal" role="form" style="margin-top: 0px;" >
+                        <div class="form-body">
+                            <button type="button" class="close" aria-hidden="true" (click)="_modalCreateProducto.ocultarDetalle()" >×</button>
+                            <h3 class="box-title"  >Ficha de Producto: &nbsp;  <strong> <i>{{ _modalCreateProducto.productoDetalle.nombre }}</i> </strong> </h3>
+                            <div class="row" style="height: 220px;" >
+                                <div class="col-md-5" >
+                                <span style="background-color: transparent;" >
+                                        <img [src]="_modalCreateProducto.productoDetalle.img | image" height="220" style="border: 1px black;" >
+                                </span>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-7">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-5">Precio Unitario:</label>
+                                    <div class="col-md-7">
+                                        <p class="form-control-static"> $ {{ _modalCreateProducto.productoDetalle.precio_unitario }} </p>
+                                    </div>
+                                </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-5">Categoria:</label>
+                                        <div class="col-md-7">
+                                            <p class="form-control-static"> {{ _modalCreateProducto.productoDetalle.subcategoria.nombre }} </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-5">Marca:</label>
+                                        <div class="col-md-7">
+                                            <p class="form-control-static"> {{ _modalCreateProducto.productoDetalle.marca.nombre }} </p>
+                                        </div>
+                                    </div>
+                                    <!-- g_prot vida_util  flujo medidas descripcion -->
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-5">Material:</label>
+                                        <div class="col-md-7">
+                                            <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.material" > {{ _modalCreateProducto.productoDetalle.material }} </p>
+                                            <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.material" > <i>No hay información</i> </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-5">Voltaje:</label>
+                                        <div class="col-md-7">
+                                            <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.voltaje" > {{ _modalCreateProducto.productoDetalle.voltaje }} </p>
+                                            <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.voltaje" > <i>No hay información</i> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-5">Potencia:</label>
+                                        <div class="col-md-7">
+                                            <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.potencia" > {{ _modalCreateProducto.productoDetalle.potencia }} </p>
+                                            <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.potencia" > <i>No hay información</i> </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-5">Temperatura:</label>
+                                        <div class="col-md-7">
+                                                <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.temperatura" > {{ _modalCreateProducto.productoDetalle.temperatura }} </p>
+                                                <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.temperatura" > <i>No hay información</i> </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-7">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-5">Vida Útil:</label>
+                                    <div class="col-md-7">
+                                        <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.vida_util" > {{ _modalCreateProducto.productoDetalle.vida_util }} </p>
+                                        <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.vida_util" > <i>No hay información</i> </p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-5">Grado Protección:</label>
+                                    <div class="col-md-7">
+                                        <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.grado_proteccion" > {{ _modalCreateProducto.productoDetalle.grado_proteccion }} </p>
+                                        <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.grado_proteccion" > <i>No hay información</i> </p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-5">Flujo Luminoso:</label>
+                                    <div class="col-md-7">
+                                        <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.flujo_luminoso" > {{ _modalCreateProducto.productoDetalle.flujo_luminoso }} </p>
+                                        <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.flujo_luminoso" > <i>No hay información</i> </p>
+                                    </div>
+                                </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-2">Altura:</label>
+                                        <div class="col-md-2">
+                                            <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.medidas" > {{ _modalCreateProducto.productoDetalle.medidas.altura }} cm </p>
+                                            <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.medidas" > <i>No hay información</i> </p>
+                                        </div>
+                                        <label class="control-label text-right col-md-2">Ancho:</label>
+                                        <div class="col-md-2">
+                                            <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.medidas" > {{ _modalCreateProducto.productoDetalle.medidas.ancho }} cm </p>
+                                            <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.medidas" > <i>No hay información</i> </p>
+                                        </div>
+                                        <label class="control-label text-right col-md-2">Largo:</label>
+                                        <div class="col-md-2">
+                                                <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.medidas" > {{ _modalCreateProducto.productoDetalle.medidas.largo }} cm </p>
+                                                <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.medidas" > <i>No hay información</i> </p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!--/row-->
+                            <h3 class="box-title">Descripción</h3>
+                            <hr class="m-t-0 m-b-40" style="margin-bottom: 5px;">
+                            <div class="row" style="margin-left: 10px; margin-right: 10px;" >
+                                <p class="form-control-static" *ngIf="_modalCreateProducto.productoDetalle.descripcion" > {{ _modalCreateProducto.productoDetalle.descripcion }} </p>
+                                <p class="form-control-static" *ngIf="!_modalCreateProducto.productoDetalle.descripcion" > <i>No hay información</i> </p>
+                            </div>
+                            
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-inverse waves-effect" (click)="_modalCreateProducto.ocultarDetalle()" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</div>
