@@ -42,6 +42,9 @@ export class UserComponent implements OnInit {
         this.total = res.total;
         if ( this.paginas.length === 0 ) {
           this.paginate();
+        } else {
+          this.paginas = [];
+          this.paginate();
         }
       });
   }
