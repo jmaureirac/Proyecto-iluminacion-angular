@@ -34,17 +34,19 @@
       <div class="card-body">
         <form #form="ngForm" ngNativeValidate (ngSubmit)="agregar(form)" class="form p-t-20">
           <div class="form-group">
-              <label for="exampleInputuname">Subcategoría</label>
+              <label>Subcategoría</label><span class="text-danger"> * </span>
               <div class="input-group">
                   <div class="input-group-addon"><i class="ti-pin-alt"></i></div>
                   <input type="text" ngModel name="nombre" class="form-control" placeholder="nombre de subcategoría">
               </div>
           </div>
           <div class="form-group">
+            <label for="exampleInputuname">Categoria</label><span class="text-danger"> * </span>
             <select class="form-control custom-select" data-placeholder="Seleccionar categoria" tabindex="1" ngModel name="categoria" required>
               <option value=""> Seleccionar categoría </option>
               <option [value]="cat._id"  *ngFor="let cat of categorias" > {{ cat.nombre }} </option>
             </select>
+            <label for=""><a [routerLink]="['/panel/clasificacion', 'categorias']"> ¿No está la categoría que pertenece? </a></label>
           </div>
           <div class="text-right">
               <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">Agregar</button>
