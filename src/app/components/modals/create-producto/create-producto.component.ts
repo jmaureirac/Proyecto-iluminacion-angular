@@ -62,6 +62,7 @@ export class CreateProductoComponent implements OnInit {
       .subscribe( res => {
         this._modalCreateProducto.notificacion.emit(res);
         this.cerrarModal();
+        form.reset();
       });    
   }
 
