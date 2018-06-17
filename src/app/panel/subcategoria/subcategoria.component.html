@@ -1,3 +1,59 @@
-<p>
-  subcategoria works!
-</p>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table color-table inverse-table">
+              <thead>
+                  <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">Subcategoría</th>
+                      <th class="text-center">Categoría</th>
+                      <th class="text-center">Acción</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let subcategoria of subcategorias; let i=index">
+                      <td class="text-center"> {{ i + 1 }} </td>
+                      <td class="text-center"> {{ subcategoria.nombre }} </td>
+                      <td class="text-center"> {{ subcategoria.categoria.nombre }} </td>
+                      <td class="text-center">
+                        <a href="javascript:void(0)">
+                          <i style="font-size: 25px" class="fa fa-pencil m-r-10"></i>
+                        </a> 
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <form #form="ngForm" ngNativeValidate (ngSubmit)="agregar(form)" class="form p-t-20">
+          <div class="form-group">
+              <label for="exampleInputuname">Subcategoría</label>
+              <div class="input-group">
+                  <div class="input-group-addon"><i class="ti-pin-alt"></i></div>
+                  <input type="text" ngModel name="nombre" class="form-control" placeholder="nombre de subcategoría">
+              </div>
+          </div>
+          <div class="form-group">
+            <select class="form-control custom-select" data-placeholder="Seleccionar categoria" tabindex="1" ngModel name="categoria" required>
+              <option value=""> Seleccionar categoría </option>
+              <option [value]="cat._id"  *ngFor="let cat of categorias" > {{ cat.nombre }} </option>
+            </select>
+          </div>
+          <div class="text-right">
+              <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">Agregar</button>
+              <button type="button" (click)="form.reset()" class="btn btn-inverse waves-effect waves-light">Cancelar</button>
+          </div>
+      </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
