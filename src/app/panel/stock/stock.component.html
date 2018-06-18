@@ -1,3 +1,90 @@
-<p>
-  stock works!
-</p>
+<div class="row animated fadeIn">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-body">
+        
+        <h3 class="title" > Productos en inventario: &nbsp; <small> {{ total }} </small> </h3>
+        <div class="table-responsive m-t-40">
+            <table class="display table full-color-table full-inverse-table hover-table" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th class="text-center">Imagen</th>
+                  <th class="text-center">Nombre</th>
+                  <th class="text-center" width="100px">Cantidad</th>
+                  <th class="text-center" width="150px">Precio Compra</th>
+                  <th class="text-center">Fecha ingreso</th>
+                  <th class="text-center">Fecha modificación</th>
+                  <th class="text-center">Editar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let stock of stocks" >
+                  <td class="text-center" style="width: 50px;" >
+                    <span class="round" style="background-color: transparent" > <img [src]="stock.producto.img | image" width="50"  > </span>
+                  </td>
+                  <ng-container *ngIf="stock.producto; else elsenombre">
+                    <td class="text-center"> {{ stock.producto.nombre }} </td>
+                  </ng-container>
+                  <ng-template #elsenombre>
+                    <td class="text-center"> {{ stock.producto.nombre }} </td>
+                  </ng-template>
+                  
+                  <td class="text-center"> <input type="number" class="form-control" [(ngModel)]="stock.cantidad"  min="0" required> </td>
+                  <td class="text-center"> <input type="number" class="form-control" [(ngModel)]="stock.precio_compra" min="0" required> </td>
+                  <td class="text-center"> {{ stock.created_at | date:"dd/MM/yyyy, HH:mm" }} </td>
+                  <td class="text-center"> {{ stock.updated_at | date:"dd/MM/yyyy, HH:mm" }} </td>
+                  <td class="text-center">
+                      <ng-container *ngIf="stock.created_at; else newStock">
+                        <a (click)="actualizarStock(stock)" >
+                          <i style="font-size: 25px" class="fa fa-save pointer text-primary m-r-10"></i>
+                        </a>
+                      </ng-container>
+                      <ng-template #newStock>
+                        <a (click)="ingresar(stock)" >
+                          <i style="font-size: 25px" class="fa fa-plus-square-o pointer text-success"></i>
+                        </a>
+                        <a (click)="cancelar(stock)" >
+                            <i style="font-size: 25px" class="fa fa-times-circle-o pointer text-danger"></i>
+                        </a>
+                      </ng-template>
+                      
+                  </td>
+                </tr>       
+              </tbody>          
+            </table>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          
+          <h3 class="title" > Productos ingresados </h3>
+          <div class="table-responsive m-t-40">
+              <table class="display table full-color-table full-inverse-table hover-table" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Agregar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let prod of productos_tmp" >
+                    <td class="text-center"> {{ prod.nombre }} </td>
+                    <td class="text-center">
+                        <a (click)="agregarStock( prod )" >
+                          <i style="font-size: 25px" class="fa fa-reply pointer text-success m-r-10"></i>
+                        </a>
+                    </td>
+                  </tr>       
+                </tbody>          
+              </table>
+            </div>
+  
+        </div>
+      </div>
+    </div>
+</div>
