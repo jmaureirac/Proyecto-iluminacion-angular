@@ -33,7 +33,7 @@
                 <td class="text-center"> $ {{ producto.precio_unitario | number }} </td>
                 <td class="text-center">
                     <button type="button" class="btn btn-secondary btn-rounded" (click)="_modalCreateProducto.mostrardetalle(producto)" >
-                        <i class="fa fa-plus"></i> &nbsp; Ver detalles
+                        <i class="fa fa-eye"></i> &nbsp; Ver detalles
                     </button>
                     <div id="responsive-modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" style="display: none; overflow-y: auto;" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -200,7 +200,10 @@
                 <td class="text-center">
                     <a href="javascript:void(0)">
                       <i style="font-size: 25px" class="fa fa-pencil m-r-10"></i>
-                    </a>                    
+                    </a>      
+                    <a [routerLink]="['/panel', 'inventario']"  >
+                        <i style="font-size: 25px" class="fa fa-plus text-success"></i>
+                    </a> &nbsp;
                     <a href="javascript:void(0)" (click)="eliminarProducto(producto)" >
                       <i style="font-size: 25px" class="fa fa-trash-o text-danger"></i>
                     </a>
