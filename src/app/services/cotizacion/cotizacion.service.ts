@@ -29,7 +29,7 @@ export class CotizacionService {
           this.router.navigate(['/login']);       
           return Observable.throw(err);
         } else { 
-          swal('¡Error!', 'Error al actualizar datos', 'error');
+          swal('¡Error!', 'Error al obtener datos', 'error');
           return Observable.throw(err);
         }
       });
@@ -50,7 +50,7 @@ export class CotizacionService {
           this.router.navigate(['/login']);       
           return Observable.throw(err);
         } else { 
-          swal('¡Error!', 'Error al actualizar datos', 'error');
+          swal('¡Error!', 'Error al obtener datos', 'error');
           return Observable.throw(err);
         }
       });
@@ -71,7 +71,7 @@ export class CotizacionService {
           this.router.navigate(['/login']);       
           return Observable.throw(err);
         } else { 
-          swal('¡Error!', 'Error al actualizar datos', 'error');
+          swal('¡Error!', 'Error al obtener datos', 'error');
           return Observable.throw(err);
         }
       });
@@ -93,7 +93,7 @@ export class CotizacionService {
           this.router.navigate(['/login']);       
           return Observable.throw(err);
         } else { 
-          swal('¡Error!', 'Error al actualizar datos', 'error');
+          swal('¡Error!', 'Error al ingresar datos', 'error');
           return Observable.throw(err);
         }
       });
