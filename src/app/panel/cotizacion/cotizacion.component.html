@@ -1,3 +1,66 @@
-<p>
-  cotizacion works!
-</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+  
+          <div class="text-right">
+            <button type="button" [routerLink]="['/panel', 'cotizar']" class="btn btn-info btn-rounded"><i class="fa fa-plus"></i> Cotizar </button>
+          </div>
+          <h3 class="title" > Cotizaciones totales: &nbsp; <small> {{ cotizaciones.length }} </small> </h3>
+          
+          <ng-container *ngIf="cotizaciones.length > 0; else nohaycotizaciones">
+            <div class="table-responsive m-t-40">
+              <table class="display table full-color-table full-inverse-table hover-table" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Usuario</th>
+                    <th class="text-center">Productos</th>
+                    <th class="text-center">Total de productos</th>
+                    <th class="text-center">Precio total</th>
+                    <th class="text-center">Fecha creación</th>
+                    <th class="text-center">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cotizacion of cotizaciones; let i=index" >
+                    <td class="text-center"> {{ i + 1 }} </td>
+                    <td class="text-center"> {{ cotizacion.user.name }} / {{ cotizacion.user.email }} </td>
+                    <td class="text-center"> {{ cotizacion.productos.length }} </td>
+                    <td class="text-center"> {{ cotizacion.productos | totalproductos }} </td>
+                    <td class="text-center"> $ {{ cotizacion.productos | preciocotizacion | number }} </td>
+                    <td class="text-center"> {{ cotizacion.created_at | date:"dd/MM/yyyy, HH:mm" }} </td>
+                    <td class="text-center">                    
+                      <a (click)="_modalCotizacion.mostrarModal( cotizacion )" >
+                        <i style="font-size: 25px" class="fa fa-eye pointer text-info m-r-10"></i>
+                      </a>
+                      <a >
+                        <i style="font-size: 25px" class="fa fa-file-pdf-o pointer text-info m-r-10"></i>
+                      </a>      
+                    </td>
+                  </tr>       
+                </tbody>          
+              </table>
+            </div>
+          </ng-container>
+          <ng-template #nohaycotizaciones>
+            <div class="table-responsive m-t-40">
+              <table class="display table full-color-table full-inverse-table hover-table" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th class="text-center">Mensaje</th>
+                  </tr>
+                </thead>
+                <h4 class="text-center" style="margin-top: 10px; margin-bottom: 10px;" > <i class="ti-face-sad"></i> No hay cotizaciones en el sistema. <i class="ti-face-sad"></i>  
+                  <a [routerLink]="['/panel','cotizar']" class="pointer"> Click aquí para cotizar </a>
+                </h4>        
+              </table>
+            </div>
+          </ng-template>
+          
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
