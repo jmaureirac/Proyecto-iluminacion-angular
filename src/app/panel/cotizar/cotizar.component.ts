@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService, ProductoService } from '../../services/service.index';
 
 @Component({
   selector: 'app-cotizar',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CotizarComponent implements OnInit {
 
-  constructor() { }
+  productos: any[] = [];
+
+  constructor(
+    public _userService: UserService,
+    public _productoService: ProductoService
+  ) { }
 
   ngOnInit() {
+  }
+
+  cargarProductos() {
+    this._productoService.getAllProductos()
+      .subscribe( res => this.productos = res.productos );
   }
 
 }
