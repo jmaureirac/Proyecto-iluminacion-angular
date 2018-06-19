@@ -26,6 +26,7 @@ import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.co
 // Componentes modal
 import { UpdateUserComponent } from '../components/modals/update-user/update-user.component';
 import { CreateProductoComponent } from '../components/modals/create-producto/create-producto.component';
+import { ViewCotizacionComponent } from '../components/modals/view-cotizacion/view-cotizacion.component';
 
 @NgModule({
     imports: [
@@ -49,7 +50,8 @@ import { CreateProductoComponent } from '../components/modals/create-producto/cr
         PerfilComponent,
         MisCotizacionesComponent,
         UpdateUserComponent,
-        CreateProductoComponent
+        CreateProductoComponent,
+        ViewCotizacionComponent
     ],
     exports: [
         PanelComponent,
