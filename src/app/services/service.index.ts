@@ -1,3 +1,4 @@
+
 // Guards
 export { LoginGuard } from './guards/login.guard';
 
@@ -14,3 +15,4 @@ export { CotizacionService } from './cotizacion/cotizacion.service';
 // Modals
 export { UpdateUserService } from '../components/modals/update-user/update-user.service';
 export { CreateProductoService } from '../components/modals/create-producto/create-producto.service';
+export { ViewCotizacionService } from '../components/modals/view-cotizacion/view-cotizacion.service';

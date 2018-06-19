@@ -10,7 +10,8 @@ import {
   CotizacionService,
   LoginGuard,
   UpdateUserService,
-  CreateProductoService
+  CreateProductoService,
+  ViewCotizacionService
 } from './service.index';
 
 
@@ -27,7 +28,8 @@ import {
     CotizacionService,
     LoginGuard,
     UpdateUserService,
-    CreateProductoService
+    CreateProductoService,
+    ViewCotizacionService
   ],
   declarations: []
 })
