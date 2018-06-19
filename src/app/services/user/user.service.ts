@@ -130,6 +130,7 @@ export class UserService {
       .catch( err => {
         if ( err.status === 401 ) {
           swal('¡Cuidado!', 'Ha expirado su sesión, vuelva a ingresar', 'info');   
+          this.logout();
           this.router.navigate(['/login']);       
           return Observable.throw(err);
         } else { 
@@ -151,6 +152,7 @@ export class UserService {
       .catch( err => {
         if ( err.status === 401 ) {
           swal('¡Cuidado!', 'Ha expirado su sesión, vuelva a ingresar', 'info');
+          this.logout();
           this.router.navigate(['/login']);       
           return Observable.throw(err);
         } else { 
