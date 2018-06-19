@@ -7,6 +7,7 @@ import {
   ProductoService,
   StockService,
   ClasificacionService,
+  CotizacionService,
   LoginGuard,
   UpdateUserService,
   CreateProductoService
@@ -23,6 +24,7 @@ import {
     ProductoService,
     StockService,
     ClasificacionService,
+    CotizacionService,
     LoginGuard,
     UpdateUserService,
     CreateProductoService
