@@ -107,16 +107,38 @@ export class UserService {
   }
 
   loadUsers() {
-    let url = URL_SERVER + '/user/all';
+    let url = URL_SERVER + '/user/all?token=' + this.token ;
 
-    return this.http.get(url);
+    return this.http.get(url)
+    .catch( err => {
+      if ( err.status === 401 ) {
+        swal('¡Cuidado!', 'Ha expirado su sesión, vuelva a ingresar', 'info');   
+        this.logout();
+        this.router.navigate(['/login']);       
+        return Observable.throw(err);
+      } else { 
+        swal('¡Error!', 'Error al obtener datos', 'error');
+        return Observable.throw(err);
+      }
+    }); 
       
   }
 
   loadUsersPaginated( desde: number = 0 ) {
-    let url = URL_SERVER + '/user?desde=' + desde;
+    let url = URL_SERVER + '/user?token=' + this.token + '&desde=' + desde;
 
-    return this.http.get(url);
+    return this.http.get(url)
+      .catch( err => {
+        if ( err.status === 401 ) {
+          swal('¡Cuidado!', 'Ha expirado su sesión, vuelva a ingresar', 'info');   
+          this.logout();
+          this.router.navigate(['/login']);       
+          return Observable.throw(err);
+        } else { 
+          swal('¡Error!', 'Error al obtener datos', 'error');
+          return Observable.throw(err);
+        }
+      }); 
   }
 
   updateUser( user: User ) {
