@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductoService, CreateProductoService } from '../../services/service.index';
+import { ProductoService, CreateProductoService, UserService } from '../../services/service.index';
 import { Router } from '@angular/router';
 import { Producto } from '../../models/producto.model';
 
@@ -19,6 +19,7 @@ export class ProductoComponent implements OnInit {
   constructor(
     public _productoService: ProductoService,
     public _modalCreateProducto: CreateProductoService,
+    public _userService: UserService,
     public router: Router
   ) { }
 

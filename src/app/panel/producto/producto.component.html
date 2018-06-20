@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
        
-        <div class="text-right">
+        <div class="text-right" *ngIf="_userService.user.role === 'ADMIN_ROLE'" >
           <button type="button" (click)="crearProducto()" class="btn btn-info btn-rounded"><i class="fa fa-plus"></i> Nuevo Producto</button>
         </div>
         <h3 class="card-title">Catálogo de Productos inscritos</h3>
@@ -19,7 +19,7 @@
                 <th class="text-center">Marca</th>
                 <th class="text-center">Precio unitario</th>
                 <th class="text-center">Info</th>
-                <th class="text-center">Acción</th>
+                <th class="text-center" *ngIf="_userService.user.role === 'ADMIN_ROLE'" >Acción</th>
               </tr>
             </thead>
             <tbody>
@@ -197,16 +197,16 @@
                         </div>
                     </div>
                 </td>
-                <td class="text-center">
+                <td class="text-center" *ngIf="_userService.user.role === 'ADMIN_ROLE'" >
                     <a href="javascript:void(0)">
                       <i style="font-size: 25px" class="fa fa-pencil m-r-10"></i>
                     </a>      
                     <a [routerLink]="['/panel', 'inventario']"  >
                         <i style="font-size: 25px" class="fa fa-plus text-success"></i>
                     </a> &nbsp;
-                    <a href="javascript:void(0)" (click)="eliminarProducto(producto)" >
+                    <!-- <a href="javascript:void(0)" (click)="eliminarProducto(producto)" >
                       <i style="font-size: 25px" class="fa fa-trash-o text-danger"></i>
-                    </a>
+                    </a> -->
                 </td>
               </tr>       
             </tbody>          
