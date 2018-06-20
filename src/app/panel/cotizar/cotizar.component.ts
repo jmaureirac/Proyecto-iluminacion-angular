@@ -90,7 +90,11 @@ export class CotizarComponent implements OnInit {
         this.resetCotizacion();
 
         this._cotizacionService.getCotizacionById( res.cotizacion )
-          .subscribe( (res2: any) => this.generarPDF( res2.cotizacion ) );
+          .subscribe( (res2: any) => {
+            this.generarPDF( res2.cotizacion );
+            this._cotizacionService.sendMail( this._userService.user.name, this._userService.user.email )
+              .subscribe();
+          } );
 
       } );
   }
