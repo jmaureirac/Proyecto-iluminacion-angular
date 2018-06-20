@@ -1,3 +1,137 @@
-<p>
-  cotizar works!
-</p>
+<div class="row animated fadeIn">
+  <div class="col-5">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 class="title">Productos para cotizar </h4>
+        <select [(ngModel)]="seleccionado" name="seleccionado" class="form-control custom-select" (change)="onChange( seleccionado )" >
+            <option value="" >Seleccionar producto</option>
+            <option [value]="producto._id" *ngFor="let producto of productos_disponibles"> {{ producto.nombre }} </option>
+        </select>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-7">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 *ngIf="mostrar_seleccionado"> Producto seleccionado: </h4>
+        <div class="form-group row animated fadeIn" *ngIf="mostrar_seleccionado" >
+          <div class="col-3 ">
+              <span style="background-color: transparent" > <img [src]="mostrar_seleccionado.img | image" width="100"  > </span>
+          </div>
+          <div class="col-3">
+            <p class="title" style="margin-top: 15px" > <strong>{{ mostrar_seleccionado.nombre }}</strong> </p>
+          </div>  
+          <div class="col-3" style="margin-top: 15px" >
+            <p class="title"> <strong>$ {{ mostrar_seleccionado.precio_unitario | number }}</strong> </p>
+          </div>
+          <div class="col-3" style="margin-top: 15px" >
+            <button class="btn btn-rounded btn-outline-success" (click)="agregarProducto( mostrar_seleccionado )" >
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="form-group row animated fadeIn" *ngIf="!mostrar_seleccionado"  >
+          <div class="col-12 text-center">
+              <h4 class="title"> Seleccione un producto para cotizar </h4>
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="table-responsive m-t-40">
+          <ng-container *ngIf="cotizacion_producto_temporal.length > 0; else nohaycotizacion">
+              <table class="display table full-color-table full-inverse-table hover-table" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th class="text-center">#</th>
+                      <th class="text-center">Producto</th>
+                      <th class="text-center">Subcategoria</th>
+                      <th class="text-center">Marca</th>
+                      <th class="text-center" width="130px" >Cantidad</th>
+                      <th class="text-center" width="130px" >Precio unitario</th>
+                      <th class="text-center">Subtotal</th>
+                      <th class="text-center">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let producto_cot of cotizacion_producto_temporal; let i = index" class="animated fadeIn" >
+                      <td class="text-center"> {{ i + 1 }} </td>
+                      <td class="text-center"> {{ producto_cot.producto.nombre }} </td>
+                      <td class="text-center"> {{ producto_cot.producto.subcategoria.nombre }} </td>
+                      <td class="text-center"> {{ producto_cot.producto.marca.nombre }} </td>
+                      
+                      <ng-container *ngIf="array_productos_confirmados.indexOf(producto_cot) >= 0; else noestainput">
+                          <td class="text-center"> {{ producto_cot.cantidad | number }} </td>
+                      </ng-container>
+                      <ng-template #noestainput>
+                        <td class="text-center"> <input type="number" [(ngModel)]="producto_cot.cantidad" name="cantidad" class="form-control"  min="0" required> </td>
+                      </ng-template>
+
+                      <td class="text-center"> $ {{ producto_cot.producto.precio_unitario | number }}</td>
+                      <td class="text-center"> $ {{ producto_cot.cantidad * producto_cot.producto.precio_unitario | number }} </td>
+
+                      <ng-container *ngIf="array_productos_confirmados.indexOf(producto_cot) >= 0; else noesta">
+                        <td class="text-center">  
+                            <a (click)="modificarProducto( producto_cot )" >
+                                <i style="font-size: 25px" class="fa fa-pencil pointer text-info m-r-10"></i>
+                              </a>                   
+                            <a (click)="quitarProducto( producto_cot )" >
+                              <i style="font-size: 25px" class="fa fa-trash-o pointer text-danger m-r-10"></i>
+                            </a>      
+                        </td>                          
+                      </ng-container>
+                      <ng-template #noesta>
+                          <td class="text-center">                    
+                              <a (click)="confirmarProducto( producto_cot )" >
+                                <i style="font-size: 25px" class="fa fa-thumbs-o-up pointer text-success m-r-10"></i>
+                              </a>
+                              <a (click)="cancelarProducto( producto_cot )" >
+                                <i style="font-size: 25px" class="fa fa-thumbs-o-down pointer text-danger m-r-10"></i>
+                              </a>      
+                            </td>
+                      </ng-template>
+                      
+                    </tr>      
+                  </tbody>          
+                </table>
+                <div class="text-right">
+                    <button class="btn btn-rounded btn-success" *ngIf="array_productos_confirmados.length > 0"  (click)="cotizar()" >
+                        <i class="fa fa-save"></i> Generar cotización
+                      </button>
+                </div>
+          </ng-container>
+          <ng-template #nohaycotizacion>
+              <table class="display table full-color-table full-inverse-table hover-table" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Mensaje</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center"> <i class="fa fa-warning"></i> No hay productos cotizados <i class="fa fa-warning"></i> </td>                      
+                    </tr>       
+                  </tbody>          
+                </table>
+          </ng-template>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
