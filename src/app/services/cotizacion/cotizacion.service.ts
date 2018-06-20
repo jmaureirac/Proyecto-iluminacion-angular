@@ -84,7 +84,7 @@ export class CotizacionService {
     return this.http.post(url, cotizacion)
       .map( (res: any) => {
         swal('¡Correcto!', 'Cotizacion creada correctamente', 'success');
-        return true;
+        return res;
       })
       .catch( err => {
         if ( err.status === 401 ) {
