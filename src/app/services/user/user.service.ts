@@ -20,6 +20,7 @@ export class UserService {
   id: string;
   user: User;
   token: string;
+  menu: any[];
 
   constructor(
     public http: HttpClient,
@@ -54,7 +55,7 @@ export class UserService {
     
     return this.http.post(url, user)
       .map( (res: any) => {
-        this.setStorage(res.id, res.token, res.user);
+        this.setStorage(res.id, res.token, res.user, res.menu);
         return true;
       })
       .catch( err => {
@@ -69,7 +70,7 @@ export class UserService {
 
     return this.http.post( url, { token })
       .map( (res: any) => {
-        this.setStorage(res.id, res.token, res.user);
+        this.setStorage(res.id, res.token, res.user, res.menu);
         return true;
       });
   }
@@ -78,27 +79,32 @@ export class UserService {
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('menu');
     this.token = '';
     this.user = null;
+    this.menu = null;
     this.router.navigate(['/inicio']);
   }
 
-  setStorage( id: string, token: string, user: User ) {
+  setStorage( id: string, token: string, user: User, menu: any[] ) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('menu', JSON.stringify(menu));
     this.token = token;
     this.user = user;
+    this.menu = menu;
   }
 
   getStorage() {
     if ( localStorage.getItem('token') ) {
       this.token = localStorage.getItem('token');
       this.user = JSON.parse(localStorage.getItem('user'));
-      
+      this.menu = JSON.parse(localStorage.getItem('menu'));
     } else {
       this.token = '';
       this.user = null;
+      this.menu = null;
     }
   }
 
