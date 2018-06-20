@@ -1,32 +1,125 @@
 <div class="fondo-negro animated fadeIn" [ngClass]="_modalCotizacion.oculto" >
 
-    <div class="modal" tabindex="-1" role="dialog" style="display: block;" *ngIf="cotizacion" >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Detalle de Cotización</h4>
-            <button type="button" class="close" aria-hidden="true" (click)="cerrarModal()" >×</button>
-          </div>
-          <div class="modal-body">
-
-            <h3> {{ cotizacion.user.nombre }} </h3>
-            <h3> {{ cotizacion.user.email }} </h3>
-            <h3> {{ cotizacion.productos.length }} </h3>
-            <h3> {{ cotizacion.productos | totalproductos }} </h3>
-            <h3> $ {{ cotizacion.productos | preciocotizacion | number }} </h3>
-            <h3> {{ cotizacion.productos }} </h3>
-            <h3> {{ cotizacion.created_at | date:"dd/MM/yyyy, HH:mm" }}  </h3>
-              
-          </div>
-              
-              
-          <div class="modal-footer">
-            <button (click)="cerrarModal()" type="button" class="btn btn-default waves-effect">Cerrar</button>
-          </div>
-  
+  <div class="modal" tabindex="-1" role="dialog" style="display: block; overflow-y: auto; " *ngIf="cotizacion" >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Detalle de Cotización</h4>
+          <button type="button" class="close" aria-hidden="true" (click)="cerrarModal()" >×</button>
         </div>
+        <div class="modal-body">
+          <div class="card-body">
+              <form class="form-horizontal">
+                  <div class="form-body">
+                      <h3 class="box-title">Información de Usuario/Empresa</h3>
+                      <hr class="m-t-0 m-b-40">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="control-label text-right col-md-3">Usuario</label>
+                                  <div class="col-md-9">
+                                    <p class="form-control-static"> {{ cotizacion.user.name }} </p> </div>
+                              </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="control-label text-right col-md-3">Email</label>
+                                  <div class="col-md-9">
+                                    <p class="form-control-static"> {{ cotizacion.user.email }} </p></div>
+                              </div>
+                          </div>
+                          <!--/span-->
+                      </div>
+                      <!--/row-->
+                      <h3 class="box-title">Detalle de Cotización</h3>
+                      <hr class="m-t-0 m-b-40">
+                      <!--/row-->
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="control-label text-right col-md-3">Fecha Emisión</label>
+                                  <div class="col-md-9">
+                                      <p class="form-control-static"> {{ cotizacion.created_at | date:"dd/MM/yyyy, HH:mm" }} </p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="control-label text-right col-md-3">Precio total</label>
+                                  <div class="col-md-9">
+                                      <p class="form-control-static"> $ {{ cotizacion.productos | preciocotizacion | number }} </p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="control-label text-right col-md-3">Productos</label>
+                                  <div class="col-md-9">
+                                      <p class="form-control-static"> {{ cotizacion.productos.length }} </p>
+                                  </div>
+                              </div>
+                          </div>
+                          <!--/span-->
+                          <div class="col-md-6">
+                              <div class="form-group row">
+                                  <label class="control-label text-right col-md-3">Total Productos</label>
+                                  <div class="col-md-9">
+                                      <p class="form-control-static"> {{ cotizacion.productos | totalproductos }} </p>
+                                  </div>
+                              </div>
+                          </div>
+                          <!--/span-->
+                      </div>
+                      <!--/row-->
+                  </div>
+                  <hr>
+                  <button class="btn btn-rounded btn-info animated fadeIn" *ngIf="!ver_productos" (click)="ver_productos = !ver_productos" >
+                    <i class="fa fa-plus"></i> Ver productos
+                  </button>
+                  <button class="btn btn-rounded btn-warning animated fadeIn" *ngIf="ver_productos" (click)="ver_productos = !ver_productos" >
+                    <i class="fa fa-minus"></i> Ocultar productos
+                  </button>
+                  
+                  <div class="table-responsive m-t-40 animated fadeIn" *ngIf="ver_productos">
+                    <table class="display table full-color-table full-inverse-table hover-table" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th class="text-center">#</th>
+                          <th class="text-center">Producto</th>
+                          <th class="text-center">Cantidad</th>
+                          <th class="text-center">Precio unitario</th>
+                          <th class="text-center">Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let productos of cotizacion.productos; let i=index" >
+                          <td class="text-center"> {{ i + 1 }} </td>
+                          <td class="text-center"> {{ productos.producto.nombre }} </td>
+                          <td class="text-center"> {{ productos.cantidad | number }} </td>
+                          <td class="text-center"> $ {{ productos.producto.precio_unitario | number }} </td>
+                          <td class="text-center"> $ {{ productos.producto.precio_unitario * productos.cantidad | number }} </td>
+                        </tr>       
+                      </tbody>          
+                    </table>
+                  </div>
+
+
+              </form>
+          </div>
+            
+        </div>
+            
+            
+        <div class="modal-footer">
+          <button (click)="cerrarModal()" type="button" class="btn btn-default waves-effect">Cerrar</button>
+        </div>
+
       </div>
     </div>
-  
-  
   </div>
+  
+  
+</div>

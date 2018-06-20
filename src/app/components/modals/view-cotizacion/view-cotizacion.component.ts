@@ -11,6 +11,8 @@ export class ViewCotizacionComponent implements OnInit {
 
   cotizacion: Cotizacion;
 
+  ver_productos: boolean = false;
+
   constructor(
     public _modalCotizacion: ViewCotizacionService
   ) { }
@@ -23,6 +25,7 @@ export class ViewCotizacionComponent implements OnInit {
 
   cerrarModal() {
     this._modalCotizacion.ocultarModal();
+    this.ver_productos = false;
   }
 
 }
