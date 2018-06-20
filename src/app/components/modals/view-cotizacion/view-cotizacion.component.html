@@ -96,11 +96,11 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let productos of cotizacion.productos; let i=index" >
-                          <td class="text-center"> {{ i + 1 }} </td>
-                          <td class="text-center"> {{ productos.producto.nombre }} </td>
-                          <td class="text-center"> {{ productos.cantidad | number }} </td>
-                          <td class="text-center"> $ {{ productos.producto.precio_unitario | number }} </td>
-                          <td class="text-center"> $ {{ productos.producto.precio_unitario * productos.cantidad | number }} </td>
+                          <td class="text-center" *ngIf="productos.producto" > {{ i + 1 }} </td>
+                          <td class="text-center" *ngIf="productos.producto" > {{ productos.producto.nombre }} </td>
+                          <td class="text-center" *ngIf="productos.producto" > {{ productos.cantidad | number }} </td>
+                          <td class="text-center" *ngIf="productos.producto" > $ {{ productos.producto.precio_unitario | number }} </td>
+                          <td class="text-center" *ngIf="productos.producto" > $ {{ productos.producto.precio_unitario * productos.cantidad | number }} </td>
                         </tr>       
                       </tbody>          
                     </table>
