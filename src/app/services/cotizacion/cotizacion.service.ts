@@ -100,4 +100,11 @@ export class CotizacionService {
       
   }
 
+  sendMail( nombre: string, email: string ) {
+    let url = URL_SERVER + '/mail/' + nombre + '/' + email;
+
+    return this.http.get(url);
+
+  }
+
 }
