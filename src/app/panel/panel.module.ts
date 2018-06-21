@@ -22,6 +22,7 @@ import { CotizarComponent } from './cotizar/cotizar.component';
 import { UserComponent } from './user/user.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.component';
+import { EditarProductoComponent } from './editar-producto/editar-producto.component';
 
 // Componentes modal
 import { UpdateUserComponent } from '../components/modals/update-user/update-user.component';
@@ -49,6 +50,7 @@ import { ViewCotizacionComponent } from '../components/modals/view-cotizacion/vi
         UserComponent,
         PerfilComponent,
         MisCotizacionesComponent,
+        EditarProductoComponent,
         UpdateUserComponent,
         CreateProductoComponent,
         ViewCotizacionComponent

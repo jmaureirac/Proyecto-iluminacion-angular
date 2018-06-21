@@ -198,7 +198,7 @@
                     </div>
                 </td>
                 <td class="text-center" *ngIf="_userService.user.role === 'ADMIN_ROLE'" >
-                    <a href="javascript:void(0)">
+                    <a [routerLink]="['/panel/producto', producto._id ]" >
                       <i style="font-size: 25px" class="fa fa-pencil m-r-10"></i>
                     </a>      
                     <a [routerLink]="['/panel', 'inventario']"  >

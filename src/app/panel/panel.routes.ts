@@ -16,6 +16,7 @@ import { CotizarComponent } from './cotizar/cotizar.component';
 import { UserComponent } from './user/user.component';
 import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { EditarProductoComponent } from './editar-producto/editar-producto.component';
 
 const panelRoutes: Routes = [
     {
@@ -28,6 +29,7 @@ const panelRoutes: Routes = [
             { path: 'perfil', component: PerfilComponent, data: { titulo: 'Mi perfil' } },
             { path: 'usuarios', component: UserComponent, data: { titulo: 'Usuarios' } },
             { path: 'productos', component: ProductoComponent, data: { titulo: 'Productos' } },
+            { path: 'producto/:id', component: EditarProductoComponent, data: { titulo: 'Editar producto' } },
             { path: 'inventario', component: StockComponent, data: { titulo: 'Inventario' } },
             { path: 'cotizar', component: CotizarComponent, data: { titulo: 'Cotizar' } },
             { path: 'cotizaciones', component: CotizacionComponent, data: { titulo: 'Cotizaciones' } },
