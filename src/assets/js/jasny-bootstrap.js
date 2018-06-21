@@ -16,6 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================== */
+function init_jasny() {
+
 
 +function ($) { "use strict";
 
@@ -196,3 +198,5 @@
   })
 
 }(window.jQuery);
+
+}
