@@ -1,5 +1,5 @@
 <div class="row animated fadeIn">
-  <div class="col-5">
+  <div class="col-lg-5 col-md-12">
     <div class="card">
       <div class="card-body">
 
@@ -13,22 +13,22 @@
     </div>
   </div>
 
-  <div class="col-7">
+  <div class="col-lg-7 col-md-12">
     <div class="card">
       <div class="card-body">
 
         <h4 *ngIf="mostrar_seleccionado"> Producto seleccionado: </h4>
         <div class="form-group row animated fadeIn" *ngIf="mostrar_seleccionado" >
-          <div class="col-3 ">
+          <div class="col-lg-3 col-sm-12 text-center ">
               <span style="background-color: transparent" > <img [src]="mostrar_seleccionado.img | image" width="100"  > </span>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-sm-12 text-center">
             <p class="title" style="margin-top: 15px" > <strong>{{ mostrar_seleccionado.nombre }}</strong> </p>
           </div>  
-          <div class="col-3" style="margin-top: 15px" >
+          <div class="col-lg-3 col-sm-12 text-center" style="margin-top: 15px" >
             <p class="title"> <strong>$ {{ mostrar_seleccionado.precio_unitario | number }}</strong> </p>
           </div>
-          <div class="col-3" style="margin-top: 15px" >
+          <div class="col-lg-3 col-sm-12 text-center" style="margin-top: 15px" >
             <button class="btn btn-rounded btn-outline-success" (click)="agregarProducto( mostrar_seleccionado )" >
               <i class="fa fa-plus"></i>
             </button>
