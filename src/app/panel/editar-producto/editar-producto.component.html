@@ -1,50 +1,196 @@
-<div class="row animated fadeIn">
-  <div class="col-lg-12" *ngIf="producto" >
-    <div class="card">
-      <div class="card-body">
-          <h4 class="card-title">Animated Line Inputs Form With Floating Labels</h4>
-          <h6 class="card-subtitle">Just add <code>floating-labels</code> class to the form.</h6>
-          <form class="floating-labels m-t-40">
-              <div class="form-group m-b-40">
-                  <input type="text" class="form-control" id="input1">
-                  <span class="bar"></span>
-                  <label for="input1">Regular Input</label>
-              </div>
-              <div class="form-group m-b-40">
-                  <input type="password" class="form-control" id="input2">
-                  <span class="bar"></span>
-                  <label for="input2">Password</label>
-              </div>
-              <div class="form-group m-b-40">
-                  <input type="text" class="form-control" id="input3">
-                  <span class="bar"></span>
-                  <label for="input3">Placeholder</label>
-              </div>
-              <div class="form-group m-b-40">
-                  <input type="text" class="form-control" id="input4">
-                  <span class="bar"></span>
-                  <label for="input4">Helping text</label>
-                  <span class="help-block"><small>A block of help text that breaks onto a new line and may extend beyond one line.</small></span> </div>
-              <div class="form-group m-b-40">
-                  <input type="text" class="form-control" id="input5" data-toggle="tooltip" data-placement="bottom" title="input with tooltip!!">
-                  <span class="bar"></span>
-                  <label for="input5">Input with tooltip</label>
-              </div>
-              <div class="form-group m-b-40">
-                  <select class="form-control p-0" id="input6">
-                      <option></option>
-                      <option>Male</option>
-                      <option>Female</option>
-                  </select><span class="bar"></span>
-                  <label for="input6">Gender</label>
-              </div>
-              <div class="form-group m-b-5">
-                  <textarea class="form-control" rows="4" id="input7"></textarea>
-                  <span class="bar"></span>
-                  <label for="input7">Text area</label>
-              </div>
-          </form>
-      </div>
+<div class="row animated fadeIn" *ngIf="producto" >
+    <div class="col-lg-9 col-sm-12" >
+    <div class="card ">
+        <div class="card-body">
+            <form #form ngNativeValidate (ngSubmit)="guardarCambios()" class="form-horizontal">
+                <div class="form-body">
+                    <h3 class="box-title">Formulario edición de producto: {{ producto.nombre }}</h3>
+                    <hr class="m-t-0 m-b-40">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-4">Nombre</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" [(ngModel)]="producto.nombre" name="nombre" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-4">Precio</label>
+                                <div class="col-md-8">
+                                    <input type="Number" class="form-control" [(ngModel)]="producto.precio_unitario" name="precio_unitario" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-4">Sub categoria </label>
+                                <div class="col-md-8">
+                                    <select class="form-control custom-select" [(ngModel)]="producto.subcategoria" name="subcategoria" (change)="onChange(producto.subcategoria)">
+                                        <option [value]="subcategoria._id" *ngFor="let subcategoria of subcategorias" > {{ subcategoria.nombre }} </option>
+                                    </select>
+                                    <small class="form-control-feedback"> Actual:  {{ current_sub }} </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-4">Categoria</label>
+                                <div class="col-md-8">
+                                    <p> {{ categoria }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-4">Marca</label>
+                                <div class="col-md-8">
+                                    <select class="form-control custom-select" [(ngModel)]="producto.marca" name="marca">
+                                        <option [value]="marca._id" *ngFor="let marca of marcas" > {{ marca.nombre }} </option>
+                                    </select>
+                                    <small class="form-control-feedback"> Actual:  {{ current_marca }} </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="m-t-0 m-b-40">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-5">Voltaje</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.voltaje" name="voltaje" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-5">Vida Útil</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.vida_util" name="vida_util" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-5">Potencia</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.potencia" name="potencia" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-5">Grado Protección</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.grado_proteccion" name="grado_proteccion" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-5">Temperatura</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.temperatura" name="temperatura" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-5">Flujo Luminoso</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.flujo_luminoso" name="flujo_luminoso" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="card-title">
+                                Medidas
+                            </h5>
+                            <hr class="m-t-0 m-b-40" style="margin-bottom: 15px;">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="" class="control-label text-right col-md-5">Largo</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.medidas.largo" name="largo" type="number" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="" class="control-label text-right col-md-5">Alto</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.medidas.altura" name="altura" type="number" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="" class="control-label text-right col-md-5">Ancho</label>
+                                <div class="col-md-7">
+                                    <input [(ngModel)]="producto.medidas.ancho" name="ancho" type="number" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="card-title">Descripción</h5>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea [(ngModel)]="producto.descripcion" name="descripcion" class="form-control" ></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-info">Confirmar</button>
+                            <button type="button" (click)="location.back()" class="btn btn-inverse">Volver</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
+    </div>
+
+    <div class="col-lg-3 col-sm-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Imagen del producto</h4>
+                        <img [src]="producto.img | image"  style="position:relative; width: 100%; min-height: 1px; max-height: 230px;" >
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Cambiar imagen</h4>
+                        <input #inputFile type="file" id="input-file-now" (change)="seleccion( $event.target.files[0] )" class="dropify" />
+                        <a (click)="recargar()" class="pointer text-center " style="padding: 15px;"> <h5>Si no aparece cuadro draggable click aquí</h5> </a>
+                        <button class="btn btn-block btn-info" (click)="subirImagen()" [disabled]="!imagen" >
+                            Actualizar imagen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
