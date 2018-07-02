@@ -138,4 +138,38 @@ export class ProductoService {
       
   }
 
+  updateImageProduct( archivo: File, id: string ) {
+
+    return new Promise( (resolve, reject) => {
+
+      let formData = new FormData();
+      let xhr = new XMLHttpRequest();
+      
+      formData.append( 'imagen', archivo, archivo.name );
+
+      xhr.onreadystatechange = function() {
+
+        if ( xhr.readyState === 4 ) {
+          
+          if ( xhr.status === 200 ) {
+            swal('¡Correcto!', 'Imagen actualizada correctamente', 'success');
+            resolve( JSON.parse(xhr.response) );
+          } else {
+            swal('¡Error!', 'El archivo seleccionado no es de tipo imagen o no tiene permisos para realizar esta acción', 'error');
+            reject( JSON.parse(xhr.response) );
+          }
+        
+        }
+      
+      };
+
+      let url = URL_SERVER + '/upload/' + id + '?token=' + this._userService.token;
+
+      xhr.open('PUT', url, true);
+      xhr.send( formData );
+    
+    });
+  
+  }
+
 }
