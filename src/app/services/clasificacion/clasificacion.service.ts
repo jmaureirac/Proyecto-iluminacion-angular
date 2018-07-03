@@ -19,7 +19,7 @@ export class ClasificacionService {
 
   // Marcas
   getMarcas() {
-    let url = URL_SERVER + '/marca?token=' + this._userService.token ;
+    let url = URL_SERVER + '/marca';
 
     return this.http.get( url )
       .map( (res: any) => {
@@ -123,7 +123,7 @@ export class ClasificacionService {
 
   // Subcategorias
   getSubcategorias() {
-    let url = URL_SERVER + '/subcategoria?token=' + this._userService.token ;
+    let url = URL_SERVER + '/subcategoria' ;
 
     return this.http.get( url )
       .map( (res: any) => {
@@ -143,7 +143,7 @@ export class ClasificacionService {
   }
 
   getSubcategoriaById( id: string ) {
-    let url = URL_SERVER + '/subcategoria/' + id + '?token=' + this._userService.token ;
+    let url = URL_SERVER + '/subcategoria/' + id;
 
     return this.http.get( url )
       .map( (res: any) => {
