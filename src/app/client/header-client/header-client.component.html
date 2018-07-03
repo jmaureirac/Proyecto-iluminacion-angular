@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-footer">
+    <div class="container">
+        <a href="#" class="navbar-brand m-r-40"><strong>JMC Iluminación</strong></a>
+        
+        <!-- Nos permite usar el componente collapse para dispositivos moviles -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Menu de Navegacion">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a [routerLinkActive]="['active']" [routerLink]="['/inicio']" class="nav-link">Inicio </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLinkActive]="['active']" [routerLink]="['/productos']" class="nav-link">Productos </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a [routerLinkActive]="['active']"  class="nav-link dropdown-toggle" id="menu-categorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categorías
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right animated fadeIn" style="padding-right: 25px;">
+                        <ul class="dropdown-user">
+                            <li routerLink="categorias" *ngFor="let categoria of categorias" class="dropdown-item pointer m-0" style="padding: 5px;" >
+                                <a [routerLink]="['/categorias']" class="pointer"> {{ categoria.nombre }} </a>  
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a [routerLinkActive]="['active']" [routerLink]="['/contacto']" class="nav-link">Contacto</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+    <ul class="navbar-nav mr-auto text-center">
+        <li class="nav-item p-10">
+            <button [routerLink]="['/login']" class="btn btn-block btn-outline-info"> <i class="fa fa-sign-in m-r-5"></i> Iniciar Sesión </button>    
+        </li>
+        <li class="nav-item p-10">
+            <button [routerLink]="['/register']" class="btn btn-block btn-info"> <i class="fa fa-plus-circle m-r-5"></i> Registrarse </button>                        
+        </li>
+    </ul>
+</nav>
