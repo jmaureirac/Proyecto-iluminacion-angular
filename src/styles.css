@@ -24,3 +24,15 @@
 .img70 {
     width: 70px;
 }
+
+.bg-footer {
+    background-color: #080c38 !important;
+}
+
+.text-footer {
+    color: whitesmoke;
+}
+
+.hr-footer {
+    background-color: whitesmoke !important;
+}
