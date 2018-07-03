@@ -64,27 +64,22 @@ export class ClasificacionService {
 
   // Categorias
   getCategorias() {
-    let url = URL_SERVER + '/categoria?token=' + this._userService.token ;
+    let url = URL_SERVER + '/categoria';
     
     return this.http.get( url )
       .map( (res: any) => {
         return res.categorias;
       })
       .catch( err => {
-        if ( err.status === 401 ) {
-          swal('¡Cuidado!', 'Ha expirado su sesión, vuelva a ingresar', 'info');
-          this._userService.logout();       
-          this.router.navigate(['/login']);
-          return Observable.throw(err);
-        } else { 
-          swal('¡Error!', 'Error al obtener datos', 'error');
-          return Observable.throw(err);
-        }
+       
+        swal('¡Error!', 'Error al obtener datos', 'error');
+        return Observable.throw(err);
+        
       });
   }
 
   getCategoriasById( id: string ) {
-    let url = URL_SERVER + '/categoria/' + id + '?token=' + this._userService.token ;
+    let url = URL_SERVER + '/categoria/' + id ;
     
     return this.http.get( url )
       .map( (res: any) => {
