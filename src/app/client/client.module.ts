@@ -5,6 +5,9 @@ import { SharedModule } from '../shared/shared.module';
 // Rutas
 import { CLIENT_ROUTES } from './client.routes';
 
+// Pipes
+import { PipesModule } from '../pipes/pipes.module';
+
 // Componentes
 import { MainComponent } from './main/main.component';
 import { ClientComponent } from './client.component';
@@ -18,7 +21,8 @@ import { CategoriasClientComponent } from './categorias-client/categorias-client
     imports: [
         CommonModule,
         SharedModule,
-        CLIENT_ROUTES
+        CLIENT_ROUTES,
+        PipesModule
     ],
     declarations: [
         ClientComponent,
