@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
 })
 export class ProductosClientComponent implements OnInit {
 
-  prueba: number[] = [1, 2, 3];
-
   total: number;
   productos: any[] = [];
   subcategorias: string[] = [];
 
   productosPorSubcategoria: any[] = [];
+
+  subcategoriaActiva: string;
 
   constructor(
     public _productoService: ProductoService,
@@ -39,29 +39,26 @@ export class ProductosClientComponent implements OnInit {
   obtenerSubcategorias( productos: any[] ) {
     productos.forEach(producto => {
       if ( !this.subcategorias.includes( producto.subcategoria.nombre ) ) {
-        // se le quita espacio al nombre, porque se bindea como id de elemento html y no lee elementos con ' ' en el id
-        this.subcategorias.push( producto.subcategoria.nombre.split(' ').join('_') ); 
+        this.subcategorias.push( producto.subcategoria.nombre ); 
       }
     });
-    this.separarProductosSubcategoria( productos, this.subcategorias );
+    this.separarProductosSubcategoria( this.subcategorias );
   }
 
-  separarProductosSubcategoria( productos: any[], subcategorias: string[] ) {
+  separarProductosSubcategoria( subcategorias: string[] ) {
     subcategorias.forEach( nombre => {
       this.productosPorSubcategoria.push({
-        id: nombre,
-        subcategoria: nombre.split('_').join(' '),
+        subcategoria: nombre,
         productos: this.filtrarProductos( nombre )
       });
     });
-    console.log(this.productosPorSubcategoria);
-
+    this.subcategoriaActiva = this.productosPorSubcategoria[0].subcategoria;
   }
 
   filtrarProductos( subcategoria: string ) {
     let arrayProductos = [];
     this.productos.forEach( prod => {
-      if ( prod.subcategoria.nombre === subcategoria.split('_').join(' ') ) {
+      if ( prod.subcategoria.nombre === subcategoria ) {
         arrayProductos.push( prod );
       }
     });

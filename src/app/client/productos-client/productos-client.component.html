@@ -1,11 +1,45 @@
 <div class="row animated fadeIn">
   <div class="col-12">
-    <div class="card">
-      <div class="card-body" *ngIf="productosPorSubcategoria" >
-  
-        <h4 class="card-title">Productos separados por tipo</h4>
-          <h6 class="card-subtitle">En la barra de la izquierda puede seleccionar tipo que busca</h6>
-          <!-- Nav tabs -->
+    <h4 class="card-title">Productos separados por tipo</h4>  
+    <h6 class="card-subtitle">En la barra de la izquierda puede seleccionar tipo que busca</h6>
+    <div class="row animated fadeIn" >
+      <!-- tabs -->
+      <div class="col-lg-3 col-sm-12 mt-5">
+        <div class="vtabs customvtab">
+          <ul class="nav nav-tabs tabs-vertical">
+            <li *ngFor="let item of productosPorSubcategoria" class="nav-item">
+              <a class="nav-link pointer" (click)="subcategoriaActiva = item.subcategoria" [ngClass]="{'active': item.subcategoria === subcategoriaActiva }" >{{ item.subcategoria }} </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- end tabs -->
+      <!-- productos -->
+      <div class="col-lg-9 col-sm-12 mt-5">
+        <div class="row" *ngFor="let item of productosPorSubcategoria">
+          <div class="col-lg-4 col-sm-6 col-12" *ngFor="let producto of item.productos">
+            <div class="card animated fadeIn" *ngIf="item.subcategoria === subcategoriaActiva" >
+              <img [src]="producto.img | image" style="width: 100%" class="card-img-top img-fluid">
+              <div class="card-body">
+                <h4 class="card-title"> {{ producto.nombre }} </h4>
+                <p *ngIf="producto.descripcion" class="card-text"> {{ producto.descripcion }} </p>
+                <p *ngIf="!producto.descripcion" class="card-text"> No hay información para mostrar </p>
+                <button class="btn btn-outline-info btn-rounded "> <i class="fa fa-search"></i> </button>
+                <button class="btn btn-outline-info btn-rounded "> <i class="fa fa-file-pdf-o"></i> </button>
+              </div>
+              <div class="card-footer">
+                  <small class="text-muted">Footer</small>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- end productos -->
+    </div>
+  </div>
+</div>
+
+
+<!-- <h4 class="card-title">Productos separados por tipo</h4>
           <div class="vtabs customvtab">
             <ul class="nav nav-tabs tabs-vertical" role="tablist">
                 <li *ngFor="let item of productosPorSubcategoria" class="nav-item"> 
@@ -14,20 +48,17 @@
                   </a>
                 </li>
             </ul>
-            <!-- Tab panes -->
             <div class="tab-content">
 
               <div *ngFor="let item of productosPorSubcategoria" class="tab-pane" [id]="item.id" role="tabpanel">
                 <div class="p-10">
-                  <!-- <h3> <a> {{ item.subcategoria }}  </a></h3> -->
                   <div class="row">
 
                     <div *ngFor="let producto of item.productos" class="col-lg-4 col-md-6 ">
-                      <!-- Card -->
                       <div class="card">
 
                         <div class="contenedor">
-                          <img class="card-img-top img-responsive" style="width: 100%;"  [src]="producto.img | image" alt="Card image cap">
+                          <img class="card-img-top img-fluid" style="width: 100%;"  [src]="producto.img | image" alt="Card image cap">
                           <div class="overlay">
                             <button class="btn btn-outline-info btn-rounded alinear-detalle"> <i class="fa fa-search"></i> </button>
                           </div>
@@ -39,7 +70,6 @@
                         <p *ngIf="!producto.descripcion" class="card-text"> No hay información para mostrar </p>
                       </div>
                     </div>
-                      <!-- Card -->
                   </div>
                       
                     </div>
@@ -49,9 +79,4 @@
 
                 
             </div>
-          </div>
-  
-      </div>
-    </div>
-  </div>
-</div>
+          </div> -->
