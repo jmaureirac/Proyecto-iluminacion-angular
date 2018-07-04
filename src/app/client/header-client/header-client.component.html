@@ -16,13 +16,13 @@
                     <a [routerLinkActive]="['active']" [routerLink]="['/productos']" class="nav-link">Productos </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a [routerLinkActive]="['active']"  class="nav-link dropdown-toggle" id="menu-categorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a [routerLinkActive]="['active']"  class="nav-link dropdown-toggle pointer" id="menu-categorias" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categorías
                     </a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn" style="padding-right: 25px;">
                         <ul class="dropdown-user">
                             <li routerLink="categorias" *ngFor="let categoria of categorias" class="dropdown-item pointer m-0" style="padding: 5px;" >
-                                <a [routerLink]="['/categorias']" class="pointer"> {{ categoria.nombre }} </a>  
+                                <a [routerLink]="['/categorias']" style="color: black;" class="pointer"> {{ categoria.nombre }} </a>  
                             </li>
                         </ul>
                     </div>
