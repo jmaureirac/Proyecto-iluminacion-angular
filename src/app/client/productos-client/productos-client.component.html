@@ -1,3 +1,57 @@
-<p>
-  productos-client works!
-</p>
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body" *ngIf="productosPorSubcategoria" >
+  
+        <h4 class="card-title">Productos separados por tipo</h4>
+          <h6 class="card-subtitle">En la barra de la izquierda puede seleccionar tipo que busca</h6>
+          <!-- Nav tabs -->
+          <div class="vtabs customvtab">
+            <ul class="nav nav-tabs tabs-vertical" role="tablist">
+                <li *ngFor="let item of productosPorSubcategoria" class="nav-item"> 
+                  <a class="nav-link" data-toggle="tab" [href]="'#'+item.id" role="tab">
+                    <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">{{ item.subcategoria }}</span> 
+                  </a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+
+              <div *ngFor="let item of productosPorSubcategoria" class="tab-pane" [id]="item.id" role="tabpanel">
+                <div class="p-10">
+                  <!-- <h3> <a> {{ item.subcategoria }}  </a></h3> -->
+                  <div class="row">
+
+                    <div *ngFor="let producto of item.productos" class="col-lg-4 col-md-6 ">
+                      <!-- Card -->
+                      <div class="card">
+
+                        <div class="contenedor">
+                          <img class="card-img-top img-responsive" style="width: 100%;"  [src]="producto.img | image" alt="Card image cap">
+                          <div class="overlay">
+                            <button class="btn btn-outline-info btn-rounded alinear-detalle"> <i class="fa fa-search"></i> </button>
+                          </div>
+                          
+                        </div>
+                        <div class="card-body">
+                          <h4 class="card-title"> {{ producto.nombre }} </h4>
+                        <p *ngIf="producto.descripcion" class="card-text"> {{ producto.descripcion }} </p>
+                        <p *ngIf="!producto.descripcion" class="card-text"> No hay información para mostrar </p>
+                      </div>
+                    </div>
+                      <!-- Card -->
+                  </div>
+                      
+                    </div>
+                      
+                </div>
+              </div>
+
+                
+            </div>
+          </div>
+  
+      </div>
+    </div>
+  </div>
+</div>
