@@ -19,7 +19,7 @@ export class ProductoService {
   ) { }
 
   getProductosPaginados( desde: number = 0 ) {
-    let url = URL_SERVER + '/producto?token=' + this._userService.token + '&desde=' + desde;
+    let url = URL_SERVER + '/producto?desde=' + desde;
 
     return this.http.get(url)
       .catch( err => {
@@ -36,7 +36,7 @@ export class ProductoService {
   }
 
   getAllProductos() {
-    let url = URL_SERVER + '/producto/all?token=' + this._userService.token;
+    let url = URL_SERVER + '/producto/all';
 
     return this.http.get(url)
       .catch( err => {
@@ -119,7 +119,7 @@ export class ProductoService {
   }
 
   getProductoByID( id: string ) {
-    let url = URL_SERVER + '/producto/' + id + '?token=' + this._userService.token;
+    let url = URL_SERVER + '/producto/' + id ;
 
     return this.http.get( url )
       .map( (res: any) => {
